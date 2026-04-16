@@ -1,7 +1,7 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
 import Gio from 'gi://Gio';
-import { ExtensionPreferences } from 'resource:///org/gnome/shell/extensions/prefs.js';
+import { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const LID_ACTIONS = [
     'suspend',
