@@ -1,7 +1,9 @@
 name: Release
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - "**"
 
 permissions:
   contents: write
@@ -19,8 +21,15 @@ jobs:
         run: |
           UUID=$(python3 -c "import json; print(json.load(open('metadata.json'))['uuid'])")
           VERSION=$(python3 -c "import json; print(json.load(open('metadata.json'))['version-name'])")
+          BRANCH="${GITHUB_REF_NAME}"
+          if [ "$BRANCH" = "main" ]; then
+            TAG="v${VERSION}"
+          else
+            TAG="v${VERSION}-${BRANCH}"
+          fi
           echo "uuid=$UUID" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Build extension zip
         run: |
@@ -31,15 +40,13 @@ jobs:
 
       - name: Create and push tag
         run: |
-          git config user.name "Andre Faria"
-          git config user.email "andremarcalfaria@gmail.com"
-          git tag "v${{ steps.meta.outputs.version }}"
-          git push origin "v${{ steps.meta.outputs.version }}"
+          git tag -f "${{ steps.meta.outputs.tag }}"
+          git push -f origin "${{ steps.meta.outputs.tag }}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: "v${{ steps.meta.outputs.version }}"
+          tag_name: "${{ steps.meta.outputs.tag }}"
           files: "*.shell-extension.zip"
           generate_release_notes: true
           fail_on_unmatched_files: true
