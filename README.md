@@ -1,6 +1,22 @@
-# Lid Helper
+<p align="center">
+  <img src="logo.svg" width="96" alt="Lid Helper logo"/>
+</p>
 
-A GNOME Shell extension that lets you control what happens when you close your laptop lid — separately for AC power and battery — directly from the Quick Settings panel or the extension preferences window.
+<h1 align="center">Lid Helper</h1>
+
+<p align="center">
+  <a href="https://github.com/andremmfaria/lid-helper/actions/workflows/ci.yml">
+    <img src="https://github.com/andremmfaria/lid-helper/actions/workflows/ci.yml/badge.svg" alt="CI"/>
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"/>
+  </a>
+  <img src="https://img.shields.io/badge/GNOME Shell-45%20%7C%2046%20%7C%2047-4A86CF" alt="GNOME Shell 45 | 46 | 47"/>
+</p>
+
+<p align="center">
+  A GNOME Shell extension that lets you control what happens when you close your laptop lid — separately for AC power and battery — directly from the Quick Settings panel or the extension preferences window.
+</p>
 
 ## Features
 
@@ -96,9 +112,19 @@ gnome-extensions enable  lid-helper@lid-helper
 
 ```
 lid-helper/
-├── metadata.json   # Extension manifest (UUID, name, supported shell versions)
-├── extension.js    # Quick Settings toggle + submenu (Option C)
-├── prefs.js        # GTK4/Adwaita preferences window (Option B)
+├── .github/
+│   ├── workflows/
+│   │   ├── ci.yml          # Validate and package on every push/PR
+│   │   └── release.yml     # Build zip and publish GitHub Release on tag
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   └── pull_request_template.md
+├── metadata.json           # Extension manifest (UUID, name, supported shell versions)
+├── extension.js            # Quick Settings toggle + submenu
+├── prefs.js                # GTK4/Adwaita preferences window
+├── logo.svg                # Extension logo
+├── LICENSE
 └── README.md
 ```
 
