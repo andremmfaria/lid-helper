@@ -1,0 +1,20 @@
+# Build output
+*.zip
+*.shell-extension.zip
+
+# Editor temp files
+*.swp
+*~
+.*.swp
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Node (if ever used for tooling)
+node_modules/
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
