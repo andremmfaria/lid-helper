@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#3584e4" opacity="0.12"/>
+
+  <!-- Laptop base (bottom half, closed) -->
+  <rect x="20" y="72" width="88" height="14" rx="4" ry="4" fill="#3584e4"/>
+  <!-- Hinge bar -->
+  <rect x="30" y="70" width="68" height="4" rx="2" ry="2" fill="#1c71d8"/>
+
+  <!-- Laptop lid (top half, slightly open - ajar) -->
+  <g transform="rotate(-12, 64, 72)">
+    <rect x="22" y="30" width="84" height="40" rx="4" ry="4" fill="#3584e4"/>
+    <!-- Screen bezel -->
+    <rect x="26" y="34" width="76" height="32" rx="3" ry="3" fill="#1c71d8"/>
+    <!-- Screen surface -->
+    <rect x="29" y="37" width="70" height="26" rx="2" ry="2" fill="#99c1f1"/>
+    <!-- Gear icon on screen -->
+    <g transform="translate(64, 50)">
+      <circle r="5" fill="#3584e4"/>
+      <circle r="2.5" fill="#99c1f1"/>
+      <!-- Gear teeth -->
+      <rect x="-1.5" y="-7.5" width="3" height="5" rx="1" fill="#3584e4"/>
+      <rect x="-1.5" y="2.5" width="3" height="5" rx="1" fill="#3584e4"/>
+      <rect x="-7.5" y="-1.5" width="5" height="3" rx="1" fill="#3584e4"/>
+      <rect x="2.5" y="-1.5" width="5" height="3" rx="1" fill="#3584e4"/>
+      <!-- Diagonal teeth -->
+      <rect x="3.2" y="-6.5" width="3" height="5" rx="1" fill="#3584e4" transform="rotate(45)"/>
+      <rect x="3.2" y="-6.5" width="3" height="5" rx="1" fill="#3584e4" transform="rotate(135)"/>
+      <rect x="3.2" y="-6.5" width="3" height="5" rx="1" fill="#3584e4" transform="rotate(225)"/>
+      <rect x="3.2" y="-6.5" width="3" height="5" rx="1" fill="#3584e4" transform="rotate(315)"/>
+    </g>
+  </g>
+
+  <!-- Bottom rubber feet -->
+  <rect x="26" y="85" width="8" height="4" rx="2" fill="#1c71d8"/>
+  <rect x="94" y="85" width="8" height="4" rx="2" fill="#1c71d8"/>
+</svg>
