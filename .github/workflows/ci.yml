@@ -20,14 +20,14 @@ jobs:
           import json, sys
           with open('metadata.json') as f:
               meta = json.load(f)
-          required = ['name', 'description', 'uuid', 'version', 'shell-version']
+          required = ['name', 'description', 'uuid', 'version-name', 'shell-version']
           missing = [k for k in required if k not in meta]
           if missing:
               print(f'ERROR: Missing keys in metadata.json: {missing}', file=sys.stderr)
               sys.exit(1)
           print('metadata.json is valid')
           print(f'  UUID: {meta[\"uuid\"]}')
-          print(f'  Version: {meta[\"version\"]}')
+          print(f'  Version: {meta[\"version-name\"]}')
           print(f'  Shell versions: {meta[\"shell-version\"]}')
           "
 

@@ -20,7 +20,7 @@ jobs:
         id: meta
         run: |
           UUID=$(python3 -c "import json; print(json.load(open('metadata.json'))['uuid'])")
-          VERSION=$(python3 -c "import json; print(json.load(open('metadata.json'))['version'])")
+          VERSION=$(python3 -c "import json; print(json.load(open('metadata.json'))['version-name'])")
           echo "uuid=$UUID" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 

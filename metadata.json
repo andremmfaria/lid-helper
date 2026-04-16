@@ -2,6 +2,7 @@
   "name": "Lid Helper",
   "uuid": "lid-helper@lid-helper",
   "description": "Control laptop lid-close behavior for AC and battery power from Quick Settings and extension preferences.",
-  "version": 1,
+  "version-name": "1.0.0",
+  "url": "https://github.com/andremmfaria/lid-helper",
   "shell-version": ["45", "46", "47"]
 }
