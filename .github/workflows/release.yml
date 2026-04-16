@@ -1,9 +1,7 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Read UUID from metadata
+      - name: Read metadata
         id: meta
         run: |
           UUID=$(python3 -c "import json; print(json.load(open('metadata.json'))['uuid'])")
@@ -27,18 +25,21 @@ jobs:
       - name: Build extension zip
         run: |
           UUID="${{ steps.meta.outputs.uuid }}"
-          zip -r "${UUID}.shell-extension.zip" \
-            extension.js \
-            prefs.js \
-            metadata.json \
-            schemas/ \
-            --exclude "*.swp" --exclude "*~"
+          zip "${UUID}.shell-extension.zip" extension.js prefs.js metadata.json
           echo "Built: ${UUID}.shell-extension.zip"
           ls -lh "${UUID}.shell-extension.zip"
+
+      - name: Create and push tag
+        run: |
+          git config user.name "Andre Faria"
+          git config user.email "andremarcalfaria@gmail.com"
+          git tag "v${{ steps.meta.outputs.version }}"
+          git push origin "v${{ steps.meta.outputs.version }}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: "v${{ steps.meta.outputs.version }}"
           files: "*.shell-extension.zip"
           generate_release_notes: true
           fail_on_unmatched_files: true
