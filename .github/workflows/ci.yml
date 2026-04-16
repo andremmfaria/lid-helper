@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate metadata.json
+        run: |
+          python3 -c "
+          import json, sys
+          with open('metadata.json') as f:
+              meta = json.load(f)
+          required = ['name', 'description', 'uuid', 'version', 'shell-version']
+          missing = [k for k in required if k not in meta]
+          if missing:
+              print(f'ERROR: Missing keys in metadata.json: {missing}', file=sys.stderr)
+              sys.exit(1)
+          print('metadata.json is valid')
+          print(f'  UUID: {meta[\"uuid\"]}')
+          print(f'  Version: {meta[\"version\"]}')
+          print(f'  Shell versions: {meta[\"shell-version\"]}')
+          "
+
+      - name: Check required files
+        run: |
+          for file in extension.js prefs.js metadata.json README.md LICENSE; do
+            if [ ! -f "$file" ]; then
+              echo "ERROR: Required file missing: $file"
+              exit 1
+            fi
+            echo "OK: $file"
+          done
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read UUID from metadata
+        id: meta
+        run: |
+          UUID=$(python3 -c "import json; print(json.load(open('metadata.json'))['uuid'])")
+          echo "uuid=$UUID" >> "$GITHUB_OUTPUT"
+
+      - name: Build extension zip
+        run: |
+          UUID="${{ steps.meta.outputs.uuid }}"
+          zip -r "${UUID}.shell-extension.zip" \
+            extension.js \
+            prefs.js \
+            metadata.json \
+            schemas/ \
+            --exclude "*.swp" --exclude "*~"
+          echo "Built: ${UUID}.shell-extension.zip"
+          ls -lh "${UUID}.shell-extension.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.uuid }}
+          path: "*.shell-extension.zip"
+          retention-days: 7
