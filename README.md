@@ -22,7 +22,7 @@
 
 - **Quick Settings menu** — flip lid-close behaviour on the fly without opening any settings app
 - **Preferences window** — clean Adwaita UI with dropdowns for AC and battery actions
-- Reads and writes `org.gnome.settings-daemon.plugins.power` GSettings keys directly (no custom schema required)
+- Reads and writes `org.gnome.settings-daemon.plugins.power` GSettings keys directly
 - Subtitle in the Quick Settings toggle always shows the current active actions at a glance
 
 ### Supported actions
@@ -46,8 +46,10 @@
 
 ```bash
 EXT_DIR=~/.local/share/gnome-shell/extensions/lid-helper@lid-helper
-mkdir -p "$EXT_DIR"
+mkdir -p "$EXT_DIR/schemas"
 cp metadata.json extension.js prefs.js "$EXT_DIR"
+cp schemas/org.gnome.shell.extensions.lid-helper.gschema.xml "$EXT_DIR/schemas/"
+glib-compile-schemas "$EXT_DIR/schemas/"
 ```
 
 Then restart GNOME Shell:
@@ -104,6 +106,8 @@ gsettings get org.gnome.settings-daemon.plugins.power lid-close-battery-action
 
 ```bash
 cp metadata.json extension.js prefs.js "$EXT_DIR"
+cp schemas/org.gnome.shell.extensions.lid-helper.gschema.xml "$EXT_DIR/schemas/"
+glib-compile-schemas "$EXT_DIR/schemas/"
 gnome-extensions disable lid-helper@lid-helper
 gnome-extensions enable  lid-helper@lid-helper
 ```
@@ -120,6 +124,8 @@ lid-helper/
 │   │   ├── bug_report.md
 │   │   └── feature_request.md
 │   └── pull_request_template.md
+├── schemas/
+│   └── org.gnome.shell.extensions.lid-helper.gschema.xml  # GSettings schema (required by EGO)
 ├── metadata.json           # Extension manifest (UUID, name, supported shell versions)
 ├── extension.js            # Quick Settings toggle + submenu
 ├── prefs.js                # GTK4/Adwaita preferences window
