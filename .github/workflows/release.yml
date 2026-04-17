@@ -44,9 +44,12 @@ jobs:
           git push -f origin "${{ steps.meta.outputs.tag }}"
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: "${{ steps.meta.outputs.tag }}"
-          files: "*.shell-extension.zip"
-          generate_release_notes: true
-          fail_on_unmatched_files: true
+        run: |
+          TAG="${{ steps.meta.outputs.tag }}"
+          gh release delete "$TAG" --yes 2>/dev/null || true
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            *.shell-extension.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
