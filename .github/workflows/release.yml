@@ -34,7 +34,7 @@ jobs:
       - name: Build extension zip
         run: |
           UUID="${{ steps.meta.outputs.uuid }}"
-          zip "${UUID}.shell-extension.zip" extension.js prefs.js metadata.json
+          zip -r "${UUID}.shell-extension.zip" extension.js prefs.js metadata.json schemas/
           echo "Built: ${UUID}.shell-extension.zip"
           ls -lh "${UUID}.shell-extension.zip"
 
