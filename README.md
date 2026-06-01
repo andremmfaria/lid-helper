@@ -46,10 +46,8 @@
 
 ```bash
 EXT_DIR=~/.local/share/gnome-shell/extensions/lid-helper@lid-helper
-mkdir -p "$EXT_DIR/schemas"
+mkdir -p "$EXT_DIR"
 cp metadata.json extension.js prefs.js "$EXT_DIR"
-cp schemas/org.gnome.shell.extensions.lid-helper.gschema.xml "$EXT_DIR/schemas/"
-glib-compile-schemas "$EXT_DIR/schemas/"
 ```
 
 Then restart GNOME Shell:
@@ -106,8 +104,6 @@ gsettings get org.gnome.settings-daemon.plugins.power lid-close-battery-action
 
 ```bash
 cp metadata.json extension.js prefs.js "$EXT_DIR"
-cp schemas/org.gnome.shell.extensions.lid-helper.gschema.xml "$EXT_DIR/schemas/"
-glib-compile-schemas "$EXT_DIR/schemas/"
 gnome-extensions disable lid-helper@lid-helper
 gnome-extensions enable  lid-helper@lid-helper
 ```
@@ -124,8 +120,6 @@ lid-helper/
 │   │   ├── bug_report.md
 │   │   └── feature_request.md
 │   └── pull_request_template.md
-├── schemas/
-│   └── org.gnome.shell.extensions.lid-helper.gschema.xml  # GSettings schema (required by EGO)
 ├── metadata.json           # Extension manifest (UUID, name, supported shell versions)
 ├── extension.js            # Quick Settings toggle + submenu
 ├── prefs.js                # GTK4/Adwaita preferences window
