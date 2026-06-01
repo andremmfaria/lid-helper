@@ -34,8 +34,12 @@
 | `nothing` | Do Nothing |
 | `blank` | Blank Screen |
 | `shutdown` | Shut Down |
-| `lock` | Lock Screen |
+| `interactive` | Ask What To Do |
 | `logout` | Log Out |
+
+> These are the seven values accepted by the `org.gnome.settings-daemon.GsdPowerActionType` enum used by both lid-close keys. Other values (e.g. `lock`) are rejected by GSettings and have no effect.
+
+> **Note:** `gnome-settings-daemon` may override the configured action and force **suspend** when the lid closes with no external monitor attached, as an overheating safeguard. In that case `nothing`/`blank` may not take effect regardless of this setting.
 
 ## Requirements
 

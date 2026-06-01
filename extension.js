@@ -10,7 +10,7 @@ const LID_ACTIONS = [
     { id: 'nothing',   label: 'Do Nothing' },
     { id: 'blank',     label: 'Blank Screen' },
     { id: 'shutdown',  label: 'Shut Down' },
-    { id: 'lock',      label: 'Lock Screen' },
+    { id: 'interactive', label: 'Ask What To Do' },
     { id: 'logout',    label: 'Log Out' },
 ];
 

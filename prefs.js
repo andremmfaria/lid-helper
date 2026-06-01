@@ -9,7 +9,7 @@ const LID_ACTIONS = [
     'nothing',
     'blank',
     'shutdown',
-    'lock',
+    'interactive',
     'logout',
 ];
 
@@ -19,7 +19,7 @@ const LID_ACTION_LABELS = [
     'Do Nothing',
     'Blank Screen',
     'Shut Down',
-    'Lock Screen',
+    'Ask What To Do',
     'Log Out',
 ];
 
@@ -45,12 +45,11 @@ export default class LidHelperPreferences extends ExtensionPreferences {
             model: labelModel,
         });
 
-        acRow.selected = Math.max(0, LID_ACTIONS.indexOf(
-            powerSettings.get_string('lid-close-ac-action')
-        ));
-        batRow.selected = Math.max(0, LID_ACTIONS.indexOf(
-            powerSettings.get_string('lid-close-battery-action')
-        ));
+        const acIdx = LID_ACTIONS.indexOf(powerSettings.get_string('lid-close-ac-action'));
+        acRow.selected = acIdx >= 0 ? acIdx : Gtk.INVALID_LIST_POSITION;
+
+        const batIdx = LID_ACTIONS.indexOf(powerSettings.get_string('lid-close-battery-action'));
+        batRow.selected = batIdx >= 0 ? batIdx : Gtk.INVALID_LIST_POSITION;
 
         acRow.connect('notify::selected', () => {
             const idx = acRow.selected;
