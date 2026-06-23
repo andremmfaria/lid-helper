@@ -11,7 +11,7 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"/>
   </a>
-  <img src="https://img.shields.io/badge/GNOME Shell-45%20%7C%2046%20%7C%2047-4A86CF" alt="GNOME Shell 45 | 46 | 47"/>
+  <img src="https://img.shields.io/badge/GNOME Shell-47%20%7C%2048%20%7C%2049%20%7C%2050-4A86CF" alt="GNOME Shell 47 | 48 | 49 | 50"/>
 </p>
 
 <p align="center">
@@ -43,7 +43,7 @@
 
 ## Requirements
 
-- GNOME Shell **45**, **46**, or **47**
+- GNOME Shell **47**, **48**, **49**, or **50**
 - `gnome-settings-daemon` (present by default on most GNOME distros)
 
 ## Installation
